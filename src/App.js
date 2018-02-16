@@ -141,7 +141,7 @@ class App extends Component {
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="ModalLongTitle">Event for {this.state.dateHandling}-{this.state.month}-{this.state.year}</h5>
+              <h5 className="modal-title" id="ModalLongTitle">Event for {this.state.dateHandling}-{MONTHS[this.state.month]}-{this.state.year}</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
