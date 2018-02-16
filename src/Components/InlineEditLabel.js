@@ -50,21 +50,22 @@ class InlineEditLabel extends Component{
   render(){
     const label = (
       <div>
-        <label>{this.props.value}</label>
-        <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg"></i>
-        <i onClick={this.props.onDelete} className="fa fa-trash-o fa-lg"></i>
+        <label className="list-events">{this.props.value}</label>
+        <i onClick={this.props.onDelete} className="fa fa-trash-o fa-lg popup-action"></i>
+        <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg popup-action"></i>      
       </div>);
     const edit =( 
       <div className="input-group">
         <input type="text" className="form-control form-control-sm" 
           autoFocus={true}
+          placeholder="Add Event Title Here"
           value={this.state.value} 
           onChange={this.handleChange}
           onKeyDown={e=>{if(e.keyCode===13){this.handleSaveClick(e);}}} 
         />
-        <span className="input-group-addon">
+        {/* <span className="input-group-addon">
           <i onClick={this.handleSaveClick} className="fa fa-floppy-o fa-lg"></i>
-        </span>
+        </span> */}
       </div>);
     return(
       <div>
