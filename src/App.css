@@ -13,3 +13,15 @@ td{
   cursor: pointer;
 }
 
+.list-group-item-css{
+  background-color:inherit;
+  border: none;
+  font-size: small;
+  padding: 0px;
+  text-align: center;
+}
+
+.input-box{
+  width: 100%;
+}
+

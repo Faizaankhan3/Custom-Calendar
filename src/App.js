@@ -77,10 +77,10 @@ class App extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <input></input>
+              <label>Event Title :</label> 
+              <input type="text" class="input-box"></input>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" className="btn btn-primary">Save changes</button>
             </div>
           </div>

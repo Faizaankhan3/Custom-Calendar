@@ -29,8 +29,9 @@ class DateBox extends Component{
     return(
       <div>
         <p className="h4 text-center">{this.props.date}</p>    
-        <ul className="list-group">
-          <li className="list-group-item"></li>
+        <ul className="list-group list-group-css">
+          <li className="list-group-item list-group-item-css"> Dummy Event 1</li>
+          <li className="list-group-item list-group-item-css"> Dummy Event 2</li>
         </ul>
       </div>
     );
