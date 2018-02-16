@@ -9,16 +9,9 @@ class App extends Component {
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
     };
-
     this.getPrevious = this.getPrevious.bind(this);
     this.getNext = this.getNext.bind(this);
   }
-
-  // componentDidMount(){
-  //   this.setState({
-  //     dateArray:getDateArray(this.state.month, this.state.year),
-  //   });
-  // }
 
   getPrevious(){
     if (this.state.month > 0) {
@@ -62,24 +55,27 @@ class App extends Component {
     });
 
     return (
-      <div className="container">
-
-        <div className="row">
-          <div className="col-sm">
-            <p onClick={this.getPrevious}>Previous</p>
+      <div>
+        <div className="row header">
+          <div className="col">
+            <p className="btn btn-primary" onClick={this.getPrevious}>     
+              <i className="fa fa-angle-left"></i> Prev
+            </p>
           </div>
-          <div className="col-sm">
+          <div className="col month-year">
             <p>{MONTHS[this.state.month]}</p>
           </div>
-          <div className="col-sm">
+          <div className="col month-year">
             <p>{this.state.year}</p>
           </div>
-          <div className="col-sm">
-            <p onClick={this.getNext}>Next</p>
+          <div className="col">
+            <p className="btn btn-primary float-right" onClick={this.getNext}>
+            Next <i className="fa fa-angle-right"></i>
+            </p>
           </div>
         </div>
         <div className="table-responsive">
-          <table className="table table-bordered">
+          <table className="table table-bordered table-striped">
             <thead>
               <tr>
                 {
