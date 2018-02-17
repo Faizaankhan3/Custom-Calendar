@@ -49,8 +49,8 @@ class InlineEditLabel extends Component{
     const label = (
       <div className="label-show">
         <p className="list-events">{this.props.value}
-        <i onClick={this.props.onDelete} className="fa fa-trash-o fa-lg popup-action"></i>
-        <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg popup-action"></i>
+          <i onClick={this.props.onDelete} className="fa fa-trash-o fa-lg popup-action"></i>
+          <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg popup-action"></i>
         </p>      
       </div>);
     const edit =( 
