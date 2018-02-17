@@ -65,7 +65,7 @@ class InlineEditLabel extends Component{
         />
       </div>);
     return(
-      <div>
+      <div id={this.props.id}>
         {this.state.isEditing?edit:label}
       </div>
     );

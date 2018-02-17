@@ -31,6 +31,14 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+
+  }
+
+  componentDidMount(){
+    $("#AddEditModal").on("shown.bs.modal", function (e) {
+      $("#editablelabel>div>input").focus();
+    });
+
   }
 
   getPrevious(){
@@ -157,7 +165,8 @@ class App extends Component {
                     onSave ={(e,v)=>this.handleSaveClick(e,v,i.id)}
                   />);
               })}
-              <InlineEditLabel  
+              <InlineEditLabel
+                id = "editablelabel"  
                 onSave ={(e,v)=>this.handleSaveClick(e,v,null)}
                 value={""}
                 isEditable={true}
