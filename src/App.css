@@ -53,6 +53,22 @@ td:hover {
   color: orangered !important;
 }
 
+tr:first-child {
+  background-color: salmon;
+}
+
+/* table, tr, td, thead{
+  border: 1px solid salmon !important;
+} */
+
+tr:nth-child(2n+2) td:first-child{
+  background-color:#F5F5F5 !important;
+}
+
+tr:nth-child(2n+1) td:first-child{
+  background-color:#E0E0E0 !important;
+}
+
 .list-events{
   font-weight: 500;
   text-overflow: inherit;
