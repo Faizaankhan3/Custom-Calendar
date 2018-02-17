@@ -74,14 +74,16 @@ class App extends Component {
   }
 
   handleDeleteClick(e,id){
-    this.setState({
-      // eslint-disable-next-line
-      events:this.state.events.filter((i)=>{
-        if(i.id!==id){
-          return i;
-        }
-      })
-    });
+    if(id){
+      this.setState({
+        // eslint-disable-next-line
+        events:this.state.events.filter((i)=>{
+          if(i.id!==id){
+            return i;
+          }
+        })
+      });
+    }
   }
 
   handleSaveClick(e,value,id){
@@ -117,7 +119,7 @@ class App extends Component {
 
   handleClick(e,date){
     if(date){
-      $(this.addEditModal).modal("show");
+      $("#AddEditModal").modal("show");
       this.setState({
         dateHandling: date,
       });
@@ -137,7 +139,7 @@ class App extends Component {
     });
 
     const modal = (
-      <div ref={(modal)=>{this.addEditModal = modal;}} className="modal fade" id="ModalCenter" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+      <div /*ref={(modal)=>{this.addEditModal = modal;}}*/  className="modal fade" id="AddEditModal" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -160,6 +162,7 @@ class App extends Component {
                 value={""}
                 isEditable={true}
                 focus={true}
+                onDelete={()=>{/*Do Nothing*/}}
               />
             </div>
             <div className="modal-footer">
@@ -181,7 +184,7 @@ class App extends Component {
             </p>
           </div>
           <div className="col month-year">
-            <p>{MONTHS[this.state.month]} - {this.state.year}</p>
+            <p>{MONTHS[this.state.month]} {this.state.year}</p>
           </div>
           <div className="col">
             <p className="btn btn-primary float-right" onClick={this.getNext}>

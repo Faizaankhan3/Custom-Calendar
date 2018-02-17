@@ -35,11 +35,9 @@ class InlineEditLabel extends Component{
       });
       this.props.onSave(e,this.state.value);
     }
-
     else{
       this.props.onDelete(e);
     }
-
   }
 
   handleChange(e){
@@ -49,10 +47,11 @@ class InlineEditLabel extends Component{
 
   render(){
     const label = (
-      <div>
-        <label className="list-events">{this.props.value}</label>
+      <div className="label-show">
+        <p className="list-events">{this.props.value}
         <i onClick={this.props.onDelete} className="fa fa-trash-o fa-lg popup-action"></i>
-        <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg popup-action"></i>      
+        <i onClick={this.handleEditClick} className="fa fa-pencil fa-lg popup-action"></i>
+        </p>      
       </div>);
     const edit =( 
       <div className="input-group">
@@ -61,11 +60,9 @@ class InlineEditLabel extends Component{
           placeholder="Add Event Title Here"
           value={this.state.value} 
           onChange={this.handleChange}
-          onKeyDown={e=>{if(e.keyCode===13){this.handleSaveClick(e);}}} 
+          onKeyDown={e=>{if(e.keyCode===13){this.handleSaveClick(e);}}}
+          onBlur={this.handleSaveClick}  
         />
-        {/* <span className="input-group-addon">
-          <i onClick={this.handleSaveClick} className="fa fa-floppy-o fa-lg"></i>
-        </span> */}
       </div>);
     return(
       <div>
