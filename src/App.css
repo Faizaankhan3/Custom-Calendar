@@ -9,13 +9,9 @@
   padding: 0px;
 }
 
-td{
-  cursor: pointer;
-}
-
 .list-group-item-css{
   background-color:inherit;
-  border: none;
+  border-bottom: thin 1px ;
   font-size: small;
   padding: 0px;
   text-align: center;
@@ -23,6 +19,7 @@ td{
 
 .list-group-css{
   background-color: #FFCDD2;
+  margin-bottom: 2%;
 }
 
 .input-box{
@@ -52,11 +49,8 @@ td{
 
 tr:first-child {
   background-color: salmon;
+  text-align: center;
 }
-
-/* table, tr, td, thead{
-  border: 1px solid salmon !important;
-} */
 
 tr:nth-child(2n+2) td:first-child{
   background-color:#F5F5F5;
@@ -66,9 +60,20 @@ tr:nth-child(2n+1) td:first-child{
   background-color:#E0E0E0;
 }
 
+.table td {
+  padding: 0px;
+  overflow: hidden;
+}
 
-td:hover {
+.date-box:hover {
   background-color: #FFCCBC !important;
+}
+
+.date-box {
+  padding: 0.75em;
+  cursor: pointer;
+  margin-bottom: -100%;
+  padding-bottom: 100%;
 }
 
 .list-events{

@@ -1,29 +1,28 @@
 import React, { Component } from "react";
-import {MONTHS, DAYS, getDateArray} from "./DateHelper";
-import DateBox from "./Components/DateBox";
-import InlineEditLabel from "./Components/InlineEditLabel";
-import $ from "jquery";
+import {MONTHS} from "./DateHelper";
+import Modal from "./components/Modal";
+import CalLayout from "./components/CalLayout";
 import "bootstrap";
 import "./App.css";
-
 
 class App extends Component {
   constructor(props){
     super();
     this.state={
+      modalShow: false,
       dateHandling : null,
+      eventIdEditing : null,
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
       events : [
         {
           id: 1,
-          date: 15,
+          date: 2,
           year: 2018,
           month: 2,
-          title: "Happy Birthday"
+          title: "Holi"
         }
-      ],
-      eventIdEditing : null
+      ]
     };
     this.getPrevious = this.getPrevious.bind(this);
     this.getNext = this.getNext.bind(this);
@@ -31,13 +30,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
-
-  }
-
-  componentDidMount(){
-    $("#AddEditModal").on("shown.bs.modal", function (e) {
-      $("#editablelabel>div>input").focus();
-    });
+    this.handleClickCloseModal = this.handleClickCloseModal.bind(this);
 
   }
 
@@ -73,7 +66,6 @@ class App extends Component {
   filterEvents(date){
     const month = this.state.month;
     const year = this.state.year;
-    // eslint-disable-next-line
     return this.state.events.filter(i=>{
       if(i.month===month && i.year=== year && i.date ===date ){
         return i;
@@ -84,7 +76,6 @@ class App extends Component {
   handleDeleteClick(e,id){
     if(id){
       this.setState({
-        // eslint-disable-next-line
         events:this.state.events.filter((i)=>{
           if(i.id!==id){
             return i;
@@ -126,66 +117,32 @@ class App extends Component {
   }
 
   handleClick(e,date){
-    if(date){
-      $("#AddEditModal").modal("show");
-      this.setState({
-        dateHandling: date,
-      });
-    }
+    this.setState({
+      modalShow:true,
+      dateHandling: date,
+    });
+  }
+
+  handleClickCloseModal(e){
+    this.setState({
+      modalShow:false,
+    });
   }
 
   render() {
-    const rows = getDateArray(this.state.month, this.state.year).map((item, i)=>{
-      const entry = item.map((element,j)=>{
-        return ( 
-          <td key={j} onClick={(e)=>{this.handleClick(e,element);}}> <DateBox date={element} events={this.filterEvents(element)}/> </td>
-        );
-      });
-      return (
-        <tr key={i}>{entry}</tr>
-      );
-    });
-
-    const modal = (
-      <div /*ref={(modal)=>{this.addEditModal = modal;}}*/  className="modal fade" id="AddEditModal" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="ModalLongTitle">Event for {this.state.dateHandling}-{MONTHS[this.state.month]}-{this.state.year}</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {this.filterEvents(this.state.dateHandling).map((i, key)=>{
-                return( 
-                  <InlineEditLabel  
-                    key={key}  value={i.title} 
-                    onDelete={(e)=>this.handleDeleteClick(e,i.id)}
-                    onSave ={(e,v)=>this.handleSaveClick(e,v,i.id)}
-                  />);
-              })}
-              <InlineEditLabel
-                id = "editablelabel"  
-                onSave ={(e,v)=>this.handleSaveClick(e,v,null)}
-                value={""}
-                isEditable={true}
-                focus={true}
-                onDelete={()=>{/*Do Nothing*/}}
-              />
-            </div>
-            <div className="modal-footer">
-              {/* <button type="button" className="btn btn-primary" >Save</button> */}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-
     return (
       <div className="calendar">
         <h1 className="heading"> Event Calendar </h1>
-        {modal}
+        <Modal 
+          isVisible={this.state.modalShow} 
+          onClose={this.handleClickCloseModal}
+          date={this.state.dateHandling}
+          month={this.state.month}
+          year={this.state.year}
+          events={this.filterEvents(this.state.dateHandling)}
+          onSave={this.handleSaveClick}
+          onDelete={this.handleDeleteClick}
+        />
         <div className="row header">
           <div className="col">
             <p className="btn btn-primary" onClick={this.getPrevious}>     
@@ -201,22 +158,12 @@ class App extends Component {
             </p>
           </div>
         </div>
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped">
-            <thead>
-              <tr>
-                {
-                  DAYS.map(day=>{
-                    return <th key={day}>{day}</th>;
-                  })
-                }
-              </tr>
-            </thead>
-            <tbody>
-              {rows}
-            </tbody>
-          </table>
-        </div>
+        <CalLayout
+          month={this.state.month}
+          year={this.state.year}
+          onCellClick={this.handleClick}
+          getEvents={this.filterEvents}
+        />
       </div>
     );
   }
